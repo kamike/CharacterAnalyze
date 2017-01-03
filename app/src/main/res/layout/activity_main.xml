@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#2000"
     tools:context="com.fiiipay.wangtao.characteranalyze.MainActivity">
 
     <LinearLayout
@@ -18,7 +19,7 @@
 
         >
 
-        <com.fiiipay.wangtao.characteranalyze.ChartacterDrawView
+        <com.fiiipay.wangtao.characteranalyze.view.ChartacterDrawView
             android:id="@+id/main_chartacter_drawview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -29,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="2dp" />
 
-        <com.fiiipay.wangtao.characteranalyze.ChartacterDrawView
+        <com.fiiipay.wangtao.characteranalyze.view.ChartacterDrawView
             android:id="@+id/main_chartacter_drawview2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -56,4 +57,5 @@
         android:clickable="true"
         android:onClick="onclickReset"
         android:text="Reset" />
+
 </RelativeLayout>

@@ -7,6 +7,7 @@ import android.view.Window;
 
 import com.fiiipay.wangtao.characteranalyze.bean.StrokeBean;
 import com.fiiipay.wangtao.characteranalyze.utils.CountTime;
+import com.fiiipay.wangtao.characteranalyze.view.ChartacterDrawView;
 
 import java.util.ArrayList;
 
@@ -34,8 +35,6 @@ public class MainActivity extends Activity {
     }
 
     private void CalculateSameValue(ArrayList<StrokeBean> strokeBeen1, ArrayList<StrokeBean> strokeBeen2) {
-        ArrayList<Float> listSize1 = new ArrayList<>();
-        ArrayList<Float> listSize2 = new ArrayList<>();
         ArrayList<Float> listTime1 = new ArrayList<>();
         ArrayList<Float> listTime2 = new ArrayList<>();
         ArrayList<Float> listLength1 = new ArrayList<>();
@@ -44,67 +43,44 @@ public class MainActivity extends Activity {
         ArrayList<Float> listAngle2 = new ArrayList<>();
 
         for (StrokeBean stroke : strokeBeen1) {
-            listSize1.add(stroke.listPoint.size() * 1.0f);
             listTime1.add(stroke.totalTime * 1.0f);
             listLength1.add(stroke.getLength());
             listAngle1.add(stroke.getTotalAnagle());
         }
         for (StrokeBean stroke : strokeBeen2) {
-            listSize2.add(stroke.listPoint.size() * 1.0f);
             listTime2.add(stroke.totalTime * 1.0f);
             listLength2.add(stroke.getLength());
             listAngle2.add(stroke.getTotalAnagle());
         }
-        System.out.println("笔画数相似度：" + getCosSameValue(listSize1, listSize2));
-        System.out.println("笔划长度相似度：" + getCosSameValue(listLength1, listLength2));
-        System.out.println("笔划总角度相似度：" + getCosSameValue(listAngle1, listAngle2));
-        System.out.println("书写时间相似度：" + getCosSameValue(listTime1, listTime2));
-
+        System.out.println("笔划长度相似度：" + CosSameValue(listLength1, listLength2));
+        System.out.println("总角度相似度：" + CosSameValue(listAngle1, listAngle2));
+        System.out.println("书写时间相似度：" + CosSameValue(listTime1, listTime2));
+        float reate = getSameValue(drawView.rectChartacter.height(), drawView2.rectChartacter.height())
+                * getSameValue(drawView.rectChartacter.width(), drawView2.rectChartacter.width());
+        System.out.println("尺寸相似性：" + reate);
         //
 
     }
 
-    private float getAreaSubSame(ArrayList<Float> listSize1, ArrayList<Float> listSize2) {
-        if (listSize1.size() != listSize2.size()) {
-            return -1;
-        }
-
-        ArrayList<Float> listTemp1 = new ArrayList<>();
-        ArrayList<Float> listTemp2 = new ArrayList<>();
-
-        for (int i = 0; i < listSize1.size() - 1; i++) {
-            listTemp1.add(listSize1.get(i) / listSize1.get(i + 1));
-            listTemp2.add(listSize2.get(i) / listSize2.get(i + 1));
-        }
-//        System.out.println("比较的数1："+listTemp1);
-//        System.out.println("比较的数2："+listTemp2);
-
-        //余弦相似性
-        float resoult = getCosSameValue(listTemp1, listTemp2);
-        return resoult;
+    private static float getSameValue(float value1, float value2) {
+        return 1 - Math.abs(value1 - value2) / (value1 + value1);
     }
 
-    private float getCosSameValue(ArrayList<Float> list1, ArrayList<Float> list2) {
-        if (list1.size() != list2.size()) {
-            return -1;
-        }
-
-        float zab = 0;
-        float p1 = 0, p2 = 0;
+    private static float CosSameValue(ArrayList<Float> list1, ArrayList<Float> list2) {
+        float total = 0;
+        float add1 = 0, add2 = 0;
         for (int i = 0; i < list1.size(); i++) {
-            zab = (float) Math.pow(list1.get(i) - list2.get(i), 2);
-            p1 += list1.get(i);
-            p2 += list2.get(i);
+            total += Math.pow(list1.get(i) - list2.get(i), 2);
+            add1 += list1.get(i);
+            add2 += list2.get(i);
         }
-        float tempP1 = p1, tempP2 = p2;
-        p1 = p1 / list1.size();
-        p2 = p2 / list2.size();
-
-        return (float) Math.abs(Math.sqrt(zab / list1.size()) - (p1 - p2));
+        return 1 - (float) Math.sqrt(total) / (add1 + add2);
     }
 
     public void onclickReset(View view) {
         drawView.clearAll();
         drawView2.clearAll();
     }
+
+
 }
