@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_compare_data"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="1dp"
+    tools:context="com.fiiipay.wangtao.characteranalyze.ui.CompareDataActivity">
+
+    <com.fiiipay.wangtao.characteranalyze.sensor.AcceleVectorView
+        android:id="@+id/compare_draw_view"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="#cecece" />
+
+
+    <Button
+        android:id="@+id/compare_press_btn"
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/selector_btn_pressed"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="按住按钮3秒内抬起按钮算一次操作..."
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/record_time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/compare_press_btn" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/compare_draw_view"
+        android:layout_marginTop="20dp">
+
+        <LinearLayout
+            android:id="@+id/compara_scroll_linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/compara_select_function_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/compare_draw_view"
+        android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:onClick="onclickSelectFunc"
+        android:text="算法(余弦相似度)"
+        android:visibility="gone" />
+</RelativeLayout>

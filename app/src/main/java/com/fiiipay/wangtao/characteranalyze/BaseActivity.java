@@ -1,6 +1,5 @@
 package com.fiiipay.wangtao.characteranalyze;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,6 +8,7 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -28,7 +28,7 @@ import java.lang.reflect.Method;
  * Created by BaseActivity on 2016/9/9.
  * QQ：751190264
  */
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends AppCompatActivity {
     public static final String NETWORK_EXCEPTION = "网络异常";
     /**
      * 导航栏高度

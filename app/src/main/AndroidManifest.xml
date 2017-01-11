@@ -8,16 +8,21 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".sensor.CathSensorActivity"
-           >
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".ChartacterActivity" />
+        <activity android:name=".sensor.CathSensorPositionActivity" />
+        <activity android:name=".sensor.SonserShowActivity" />
+        <activity android:name=".sensor.CatchDynamicPositionActivity" />
+        <activity android:name=".sensor.AccelerationVectorActivity" />
+        <activity android:name=".ui.RecordActivity" />
+        <activity android:name=".ui.CompareDataActivity" />
+        <activity android:name=".ui.AnalysizeDataActivity"></activity>
     </application>
 
 </manifest>

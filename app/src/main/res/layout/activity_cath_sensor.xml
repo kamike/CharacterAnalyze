@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="4dp"
-    tools:context="com.fiiipay.wangtao.characteranalyze.sensor.CathSensorActivity">
+    android:padding="1dp"
+    tools:context="com.fiiipay.wangtao.characteranalyze.sensor.CathSensorPositionActivity">
 
     <com.fiiipay.wangtao.characteranalyze.sensor.DrawFormView
         android:id="@+id/sonsor_catch_drawform"
         android:layout_width="match_parent"
-        android:clickable="true"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:clickable="true" />
 
     <LinearLayout
         android:id="@+id/sonsor_catch_show_linear"
@@ -22,7 +22,8 @@
         android:layout_alignParentBottom="true"
         android:background="#3000"
         android:orientation="vertical"
-        android:padding="4dp" />
+        android:padding="4dp"
+        android:visibility="gone" />
 
 
 </LinearLayout>
