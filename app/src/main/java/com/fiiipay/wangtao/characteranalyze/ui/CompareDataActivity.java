@@ -218,42 +218,67 @@ public class CompareDataActivity extends BaseActivity implements SensorEventList
         }
     };
 
-
     public float notSameVector3(ArrayList<Vector3Bean> list1, ArrayList<Vector3Bean> list2) {
-        int sizeMin = list1.size() < list2.size() ? list1.size() : list2.size();
-        float totalSpace1 = 0;
-        for (int i = 0; i < sizeMin; i++) {
-            Vector3Bean v1 = list1.get(i);
-            Vector3Bean v2 = list2.get(i);
-            totalSpace1 += Math.pow(v1.x - v2.x, 2) + Math.pow(v1.y - v2.y, 2) + Math.pow(v1.z - v2.z, 2);
-
+        ArrayList<Float> vectorX1 = new ArrayList<>();
+        ArrayList<Float> vectorX2 = new ArrayList<>();
+        for (Vector3Bean v : list1) {
+            vectorX1.add(v.x);
         }
-        return (float) Math.sqrt(totalSpace1);
+        for (Vector3Bean v : list2) {
+            vectorX2.add(v.x);
+        }
+
+        ArrayList<Float> vectorY1 = new ArrayList<>();
+        ArrayList<Float> vectorY2 = new ArrayList<>();
+        for (Vector3Bean v : list1) {
+            vectorY1.add(v.y);
+        }
+        for (Vector3Bean v : list2) {
+            vectorY2.add(v.y);
+        }
+
+        ArrayList<Float> vectorZ1 = new ArrayList<>();
+        ArrayList<Float> vectorZ2 = new ArrayList<>();
+        for (Vector3Bean v : list1) {
+            vectorZ1.add(v.z);
+        }
+        for (Vector3Bean v : list2) {
+            vectorZ2.add(v.z);
+        }
+
+        float sameX = notSameRate(vectorX1, vectorX2);
+        float sameY = notSameRate(vectorY1, vectorY2);
+        float sameZ = notSameRate(vectorZ1, vectorZ2);
+
+        doLogMsg("sameX：" + sameX);
+        doLogMsg("sameY：" + sameY);
+        doLogMsg("sameZ：" + sameZ);
+
+        return (sameX + sameY + sameZ) / 3;
     }
 
     //
-    public float notSameRate(ArrayList<Float> vector1, ArrayList<Float> vector2) {
+//    public float notSameRate(ArrayList<Float> vector1, ArrayList<Float> vector2) {
+//        float total = 0;
+//        float add1 = 0, add2 = 0;
+//        int sizeMin = vector1.size() < vector2.size() ? vector1.size() : vector2.size();
+//        doLogMsg("比较次数："+sizeMin);
+//        for (int i = 0; i < sizeMin; i++) {
+//            total += Math.pow(vector1.get(i) - vector2.get(i), 2);
+//            add1 += Math.abs(vector1.get(i));
+//            add2 += Math.abs(vector2.get(i));
+//        }
+//        return (float) Math.sqrt(total) / (add1 + add2);
+//    }
+    private static float notSameRate(ArrayList<Float> list1, ArrayList<Float> list2) {
         float total = 0;
         float add1 = 0, add2 = 0;
-        int sizeMin = vector1.size() < vector2.size() ? vector1.size() : vector2.size();
-        for (int i = 0; i < sizeMin; i++) {
-            total += Math.pow(vector1.get(i) - vector2.get(i), 2);
-            add1 += Math.abs(vector1.get(i));
-            add2 += Math.abs(vector2.get(i));
+        int size = list1.size() < list2.size() ? list1.size() : list2.size();
+        for (int i = 0; i < size; i++) {
+            total += Math.pow(Math.abs(list1.get(i) - list2.get(i)), 2);
+            add1 += Math.abs(list1.get(i));
+            add2 += Math.abs(list2.get(i));
         }
         return (float) Math.sqrt(total) / (add1 + add2);
     }
-//    private static float notSameRate(ArrayList<Float> list1, ArrayList<Float> list2) {
-//        float zab = 0;
-//        float za2 = 0;
-//        float zb2 = 0;
-//        int size = list1.size() < list2.size() ? list1.size() : list2.size();
-//        for (int i = 0; i < size; i++) {
-//            zab += list1.get(i) * list2.get(i);
-//            za2 += Math.pow(list1.get(i), 2);
-//            zb2 += Math.pow(list2.get(i), 2);
-//        }
-//        return (float) Math.abs(zab / (Math.sqrt(za2) * Math.sqrt(zb2)));
-//    }
-
 }
